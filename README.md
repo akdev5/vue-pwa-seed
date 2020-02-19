@@ -1,4 +1,4 @@
-# vue-pwa-seed
+# Vue PWA Seed
 
 ## Technology Used
 
