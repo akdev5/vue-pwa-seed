@@ -25,13 +25,13 @@
             ></v-app-bar-nav-icon>
             <v-spacer class="hidden-md-and-up"></v-spacer>
             <router-link to="/">
-                <v-toolbar-title data-cy="titleBtn">{{
+                <v-toolbar-title class="white--text" data-cy="titleBtn">{{
                     appTitle
                 }}</v-toolbar-title>
             </router-link>
             <v-btn
                 text
-                class="hidden-sm-and-down nav-menu"
+                class="hidden-sm-and-down nav-menu ml-md-5"
                 to="/menu"
                 data-cy="menuBtn"
                 >Menu</v-btn
@@ -39,7 +39,7 @@
             <v-spacer class="hidden-sm-and-down"></v-spacer>
             <v-btn text to="/sign-in" data-cy="signinBtn">SIGN IN</v-btn>
             <v-btn
-                color="blue lighten-3"
+                color="blue darken-1"
                 to="/join"
                 class="nav-join"
                 data-cy="joinBtn"
