@@ -32,12 +32,12 @@
                             </v-text-field>
                             <v-text-field
                                 prepend-icon="lock"
-                                name="password"
+                                name="passwordConfirmation"
                                 label="Password Confirmation"
                                 type="password"
                                 required
-                                v-model="password2"
-                                :rules="passwordRules"
+                                v-model="passwordConfirmation"
+                                :rules="passwordConfirmationRules"
                                 data-cy="joinPasswordField"
                             >
                             </v-text-field>
@@ -67,7 +67,7 @@ export default {
             valid: false,
             email: '',
             password: '',
-            password2: '',
+            passwordConfirmation: '',
             emailRules: [
                 v => !!v || 'E-mail is required',
                 v => /.+@.+/.test(v) || 'E-mail must be valid'
@@ -77,6 +77,12 @@ export default {
                 v =>
                     v.length >= 6 ||
                     'Password must be greater than 6 characters'
+            ],
+            passwordConfirmationRules: [
+                v => !!v || 'Confrim Password',
+                () =>
+                    this.password === this.passwordConfirmation ||
+                    'Password must match'
             ]
         };
     },
