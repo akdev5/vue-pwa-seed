@@ -49,8 +49,8 @@ export default new Vuex.Store({
             firebase
                 .auth()
                 .createUserWithEmailAndPassword(email, password)
-                .then(user => {
-                    commit('setUser', user);
+                .then(res => {
+                    commit('setUser', res.user);
                     commit('setIsAuthenticated', true);
                     router.push('/about');
                 })
@@ -64,8 +64,8 @@ export default new Vuex.Store({
             firebase
                 .auth()
                 .signInWithEmailAndPassword(email, password)
-                .then(user => {
-                    commit('setUser', user);
+                .then(res => {
+                    commit('setUser', res.user);
                     commit('setIsAuthenticated', true);
                     router.push('/about');
                 })
@@ -94,13 +94,13 @@ export default new Vuex.Store({
             firebase
                 .database()
                 .ref('users')
-                .child(state.user.user.uid)
+                .child(state.user.uid)
                 .push(payload.recipe.label);
         },
         getUserRecipes({ state, commit }) {
             return firebase
                 .database()
-                .ref('users/' + state.user.user.uid)
+                .ref('users/' + state.user.uid)
                 .once('value', snapshot => {
                     commit('setUserRecipes', snapshot.val());
                 });
