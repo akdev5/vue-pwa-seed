@@ -37,14 +37,22 @@
                 >Menu</v-btn
             >
             <v-spacer class="hidden-sm-and-down"></v-spacer>
-            <v-btn text to="/sign-in" data-cy="signinBtn">SIGN IN</v-btn>
-            <v-btn
-                color="blue darken-1"
-                to="/join"
-                class="nav-join"
-                data-cy="joinBtn"
-                >JOIN</v-btn
-            >
+            <div v-if="!isAuthenticated" class="hidden-sm-and-down">
+                <v-btn text to="/login" data-cy="signinBtn">Login</v-btn>
+                <v-btn
+                    color="blue darken-1"
+                    to="/register"
+                    class="nav-join"
+                    data-cy="joinBtn"
+                    >Register</v-btn
+                >
+            </div>
+            <div v-else>
+                <v-btn text to="/about">PROFILE</v-btn>
+                <v-btn outlined color="white" @click="logout" data-cy="logout"
+                    >Logout</v-btn
+                >
+            </div>
         </v-app-bar>
     </span>
 </template>
@@ -59,10 +67,20 @@ export default {
             items: [
                 { title: 'Menu', url: '/menu' },
                 { title: 'Profile', url: '/about' },
-                { title: 'Sign In', url: '/sign-in' },
-                { title: 'Join', url: '/join' }
+                { title: 'Login', url: '/login' },
+                { title: 'Register', url: '/register' }
             ]
         };
+    },
+    computed: {
+        isAuthenticated() {
+            return this.$store.getters.isAuthenticated;
+        }
+    },
+    methods: {
+        logout() {
+            this.$store.dispatch('userSignOut');
+        }
     }
 };
 </script>
